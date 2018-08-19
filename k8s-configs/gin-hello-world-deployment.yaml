@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gin-hello-world-deployment
+  labels:
+    app: gin-hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gin-hello-world
+  template:
+    metadata:
+      labels:
+        app: gin-hello-world
+    spec:
+      containers:
+      - name: gin-hello-world
+        image: karlhopkinsonturrell/gin-hello-world
+        ports:
+        - containerPort: 8080
+
