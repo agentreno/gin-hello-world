@@ -1,12 +1,18 @@
 package main
 
+import "os"
 import "github.com/gin-gonic/gin"
 
 func setupRouter() *gin.Engine {
+	message := os.Getenv("APP_MESSAGE")
+	if len(message) == 0 {
+		message = "pong"
+	}
+
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": message,
 		})
 	})
     return r

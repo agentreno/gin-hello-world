@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: gin-hello-world-deployment
@@ -16,7 +16,13 @@ spec:
     spec:
       containers:
       - name: gin-hello-world
-        image: karlhopkinsonturrell/gin-hello-world
+        image: karlhopkinsonturrell/gin-hello-world:2
         ports:
         - containerPort: 8080
+        env:
+        - name: APP_MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: gin-hello-world-configmap
+              key: app-message
 
