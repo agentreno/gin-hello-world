@@ -19,6 +19,17 @@ spec:
         image: karlhopkinsonturrell/gin-hello-world:2
         ports:
         - containerPort: 8080
+#        livenessProbe:
+#          httpGet:
+#            path: /ping
+#            port: 8080
+#          periodSeconds: 1
+#        readinessProbe:
+#          httpGet:
+#            path: /ping
+#            port: 8080
+#          periodSeconds: 1
+#          initialDelaySeconds: 3
         env:
         - name: APP_MESSAGE
           valueFrom:
