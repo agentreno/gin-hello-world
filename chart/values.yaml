@@ -13,7 +13,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 configmap:
-  message: "pong"
+  message: "pingpong"
 
 service:
   type: LoadBalancer
