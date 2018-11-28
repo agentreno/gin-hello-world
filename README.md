@@ -7,9 +7,9 @@ tests, the Gin framework), Docker, and Kubernetes.
 
 ## TODO
 
-- Work out why adding in liveness and readiness probe causes crash loops in
+- ~~Work out why adding in liveness and readiness probe causes crash loops in
   kubernetes deployments (uncomment `k8s-configs/gin-hello-world-deployment.yaml`
-  and run `kubectl apply -f k8s-configs/`
+  and run `kubectl apply -f k8s-configs/`~~
 
 - Try a regular image redeployment without downtime:
   `while true; do http http://192.168.99.100:31523/ping; sleep 0.1; done`
