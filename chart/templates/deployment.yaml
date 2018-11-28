@@ -35,17 +35,18 @@ spec:
               configMapKeyRef:
                 name: gin-hello-world-configmap
                 key: app-message
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#            periodSeconds: 3
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#            periodSeconds: 3
-#            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            periodSeconds: 3
+            initialDelaySeconds: 18
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            periodSeconds: 3
+            initialDelaySeconds: 15
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
