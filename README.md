@@ -16,7 +16,7 @@ tests, the Gin framework), Docker, and Kubernetes.
   Update container spec to increment image tag, try strategy rollingUpdate
   maxUnavailable
 
-- Work out how to trigger k8s deployments when an associated configmap changes
-  without downtime:
+- ~~Work out how to trigger k8s deployments when an associated configmap changes
+  without downtime:~~
   https://github.com/kubernetes/kubernetes/issues/22368
   https://github.com/helm/helm/blob/master/docs/charts_tips_and_tricks.md#automatically-roll-deployments-when-configmaps-or-secrets-change
