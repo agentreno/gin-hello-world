@@ -9,6 +9,9 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "chart.name" . }}
