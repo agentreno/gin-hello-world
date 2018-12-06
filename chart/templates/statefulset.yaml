@@ -1,5 +1,5 @@
 apiVersion: apps/v1beta2
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "chart.fullname" . }}
   labels:
@@ -16,6 +16,15 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "chart.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
+  serviceName: "ginhelloworld"
+  volumeClaimTemplates:
+  - metadata:
+    name: ginps
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
   template:
     metadata:
       annotations:
@@ -24,6 +33,10 @@ spec:
         app.kubernetes.io/name: {{ include "chart.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: message-writer
+          image: busybox
+          command: ["sh", "-c", "echo 'hello from file' >> /mnt/store/file"]
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -32,6 +45,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          volumeMounts:
+            - name: ginps
+              mountPath: /mnt/store
           env:
           - name: APP_MESSAGE
             valueFrom:

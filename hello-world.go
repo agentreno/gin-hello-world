@@ -15,6 +15,17 @@ func setupRouter() *gin.Engine {
 			"message": message,
 		})
 	})
+
+	r.GET("/file", func(c *gin.Context) {
+        dat, err := ioutil.ReadFile("/mnt/store/output")
+        if err != nil {
+            dat := "error"
+        }
+
+		c.JSON(200, gin.H{
+			"message": string(dat),
+		})
+	})
     return r
 }
 
